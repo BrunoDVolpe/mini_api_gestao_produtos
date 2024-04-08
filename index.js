@@ -35,15 +35,15 @@ app.post("/produtos", (req, res)=>{
         res.status(400).send("Erro: produto não criado. Faltando nome, preço ou descrição.");
         return
     }
-    if (typeof(nome) !== 'string' && nome.length === 0) {
+    if (typeof(nome) !== 'string' || nome.length === 0) {
         // Obrigatório. Deve ser string e maior que zero.
         erro.push("'nome' deve ser uma string não vazia");
     }
-    if (typeof(preco) !== 'number' && isNaN(parseFloat(preco))) {
-        // Obrigatório. Deve ser número.
+    if (typeof(preco) !== 'number' || isNaN(parseFloat(preco)) || preco < 0) {
+        // Obrigatório. Deve ser número e maior que 0.
         erro.push("'preco' deve ser um número não vazio");
     }
-    if (typeof(descricao) !== 'string' && descricao.length === 0) {
+    if (typeof(descricao) !== 'string' || descricao.length === 0) {
         // Obrigatório. Deve ser string não vazia.
         erro.push("'descricao' deve ser uma string não vazia");
     }
@@ -70,15 +70,15 @@ app.put("/produtos/:id", (req, res)=>{
     let erro = [];
 
     // Verificar e validar o que está sendo alterado
-    if (typeof(nome) !== 'string' && nome.length === 0) {
+    if (typeof(nome) !== 'string' || nome.length === 0) {
         // Obrigatório. Deve ser string e maior que zero.
         erro.push("'nome' deve ser uma string não vazia");
     }
-    if (preco && (typeof(preco) !== 'number' && isNaN(parseFloat(preco)))) {
-        // Obrigatório. Deve ser número.
-        erro.push("'preco' deve ser um número não vazio");
+    if (typeof(preco) !== 'number' || isNaN(parseFloat(preco)) || preco < 0) {
+        // Obrigatório. Deve ser número e maior que 0.
+        erro.push("'preco' deve ser um número não vazio maior que zero");
     }
-    if (descricao && (typeof(descricao) !== 'string' && descricao.length === 0)) {
+    if (typeof(descricao) !== 'string' || descricao.length === 0) {
         // Obrigatório. Deve ser string não vazia.
         erro.push("'descricao' deve ser uma string não vazia");
     }
@@ -93,6 +93,10 @@ app.put("/produtos/:id", (req, res)=>{
         }
         return false;
     })
+    if (index === -1){
+        res.status(404).send(`Produto com ID ${id} não encontrado.`);
+        return
+    }
     produtos[index] = {id: parseInt(id), nome, preco: parseFloat(preco).toFixed(2), descricao};
     res.status(200).json(`Produto ID ${id} atualizado com sucesso`);
 })
