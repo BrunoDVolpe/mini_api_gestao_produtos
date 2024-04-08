@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "baef96c4-4884-41f7-aef8-d49d2271cb2b",
+		"name": "Mini-projeto - CRUD Produtos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34119793"
+	},
+	"item": [
+		{
+			"name": "Adicionar novo produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"mouse\",\r\n    \"preco\": 69.00,\r\n    \"descricao\": \"Mouse óptico Dell - MS116\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/produtos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os produtos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/produtos",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar produto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Notebook Insp.\",\r\n    \"preco\": 2899.00,\r\n    \"descricao\": \"Notebook Inspiron 15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/produtos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar produto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/produtos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"produtos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
